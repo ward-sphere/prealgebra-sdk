@@ -1,3 +1,4 @@
+#include <cmath>
 #include <BasicNumberSimplifier.hpp>
 
 using namespace sdkmath::prealgebra;
@@ -7,7 +8,7 @@ static bool getPrimeFactorizationCandidates_continueGate(long& candidate, long& 
 }
 
 static bool getPrimeFactorizationCandidates_breakGate(long& candidate, long& prev) {
-    return false;
+    return prev >= sqrt(candidate);
 }
 
 static std::vector<long> getPrimeFactorizationCandidates(long& i) {
