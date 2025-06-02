@@ -47,48 +47,48 @@ TEST(INumberSimplifierTest, TestPrimeFactorization5) {
 }
 
 TEST(INumberSimplifierTest, TestSimplifyFraction1) {
-    Fraction input = Fraction(14, 21);
-    Fraction expectedOutpout = Fraction(2, 3);
+    Fraction input(14, 21);
+    Fraction expectedOutpout(2, 3);
     Fraction actualOutput = simplifier.simplifyFraction(input);
 
     ASSERT_EQ(expectedOutpout, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestSimplifyFraction2) {
-    Fraction input = Fraction(15, 35);
-    Fraction expectedOutpout = Fraction(3, 7);
+    Fraction input(15, 35);
+    Fraction expectedOutpout(3, 7);
     Fraction actualOutput = simplifier.simplifyFraction(input);
 
     ASSERT_EQ(expectedOutpout, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestSimplifyFraction3) {
-    Fraction input = Fraction(20, 70);
-    Fraction expectedOutpout = Fraction(2, 7);
+    Fraction input(20, 70);
+    Fraction expectedOutpout(2, 7);
     Fraction actualOutput = simplifier.simplifyFraction(input);
 
     ASSERT_EQ(expectedOutpout, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestSimplifyFraction4) {
-    Fraction input = Fraction(7, 21);
-    Fraction expectedOutpout = Fraction(1, 3);
+    Fraction input(7, 21);
+    Fraction expectedOutpout(1, 3);
     Fraction actualOutput = simplifier.simplifyFraction(input);
 
     ASSERT_EQ(expectedOutpout, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestSimplifyFraction5) {
-    Fraction input = Fraction(15, 105);
-    Fraction expectedOutpout = Fraction(1, 7);
+    Fraction input(15, 105);
+    Fraction expectedOutpout(1, 7);
     Fraction actualOutput = simplifier.simplifyFraction(input);
 
     ASSERT_EQ(expectedOutpout, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestSimplifyFraction6) {
-    Fraction input = Fraction(35, 7);
-    Fraction expectedOutpout = Fraction(5, 1);
+    Fraction input(35, 7);
+    Fraction expectedOutpout(5, 1);
     Fraction actualOutput = simplifier.simplifyFraction(input);
 
     ASSERT_EQ(expectedOutpout, actualOutput);
