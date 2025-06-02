@@ -1,9 +1,8 @@
 #ifndef sdkmath_prealgebra_INumberSimplifier
 #define sdkmath_prealgebra_INumberSimplifier
 
-#include <include/Integer.hpp>
-#include <include/Fraction.hpp>
-#include <include/MixedNumber.hpp>
+#include <Integer.hpp>
+#include <Fraction.hpp>
 
 #include <vector>
 

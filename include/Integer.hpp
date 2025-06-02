@@ -15,9 +15,11 @@ namespace sdkmath {
 
             Integer(long value);
 
-            Integer(Integer& copy);
+            long getValue(void) const;
 
-            long getValue(void);
+            bool operator==(const Integer& other) const;
+
+            bool operator!=(const Integer& other) const;
 
         };
 

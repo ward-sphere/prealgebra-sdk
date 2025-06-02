@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Build/Editor Directories
 .vscode/
+cmake/

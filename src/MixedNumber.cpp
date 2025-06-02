@@ -1,4 +1,4 @@
-#include <include/MixedNumber.hpp>
+#include <MixedNumber.hpp>
 
 using namespace sdkmath::prealgebra;
 
@@ -20,12 +20,7 @@ void MixedNumber::checkProperFraction() {
 
 MixedNumber::MixedNumber(Integer base, Fraction fraction) : base(base),
         fraction(fraction) {
-    
-}
-
-MixedNumber::MixedNumber(MixedNumber& copy) : base(copy.getBase()),
-        fraction(copy.getFraction()) {
-    
+    checkProperFraction();
 }
 
 Integer MixedNumber::getBase() { return this->base; }

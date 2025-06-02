@@ -1,7 +1,7 @@
 #ifndef sdkmath_prealgebra_Fraction
 #define sdkmath_prealgebra_Fraction
 
-#include <include/Integer.hpp>
+#include <Integer.hpp>
 
 namespace sdkmath {
 
@@ -17,11 +17,13 @@ namespace sdkmath {
 
             Fraction(Integer numerator, Integer denominator);
 
-            Fraction(Fraction& copy);
+            Integer getNumerator(void) const;
 
-            Integer getNumerator(void);
+            Integer getDenominator(void) const;
 
-            Integer getDenominator(void);
+            bool operator==(const Fraction& other) const;
+
+            bool operator!=(const Fraction& other) const;
 
         };
 

@@ -1,4 +1,4 @@
-#include <include/Fraction.hpp>
+#include <Fraction.hpp>
 
 #include <stdexcept>
 
@@ -12,9 +12,13 @@ void Fraction::validateDenominator(void) {
 Fraction::Fraction(Integer numerator, Integer denominator) : numerator(numerator), 
         denominator(denominator) { validateDenominator(); }
 
-Fraction::Fraction(Fraction& copy) : numerator(copy.getNumerator()), 
-        denominator(copy.getDenominator()) { validateDenominator(); }
+Integer Fraction::getNumerator(void) const { return this->numerator; }
 
-Integer Fraction::getNumerator(void) { return this->numerator; }
+Integer Fraction::getDenominator(void) const { return this->denominator; }
 
-Integer Fraction::getDenominator(void) { return this->denominator; }
+bool Fraction::operator==(const Fraction& other) const {
+    return getNumerator().getValue() == other.getNumerator().getValue()
+        && getDenominator().getValue() == other.getDenominator().getValue();
+}
+
+bool Fraction::operator!=(const Fraction& other) const { return !(*this == other); }

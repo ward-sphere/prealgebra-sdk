@@ -1,8 +1,8 @@
 #ifndef sdkmath_prealgebra_MixedNumber
 #define sdkmath_prealgebra_MixedNumber
 
-#include <include/Integer.hpp>
-#include <include/Fraction.hpp>
+#include <Integer.hpp>
+#include <Fraction.hpp>
 
 namespace sdkmath {
 
@@ -19,8 +19,6 @@ namespace sdkmath {
         public:
 
             MixedNumber(Integer base, Fraction fraction);
-
-            MixedNumber(MixedNumber& copy);
 
             Integer getBase(void);
 

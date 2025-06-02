@@ -1,9 +1,9 @@
 #ifndef sdkmath_prealgebra_INumberTranslator
 #define sdkmath_prealgebra_INumberTranslator
 
-#include <include/Integer.hpp>
-#include <include/Fraction.hpp>
-#include <include/MixedNumber.hpp>
+#include <Integer.hpp>
+#include <Fraction.hpp>
+#include <MixedNumber.hpp>
 
 namespace sdkmath {
 
