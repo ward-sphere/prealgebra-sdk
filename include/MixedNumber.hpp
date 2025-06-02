@@ -20,9 +20,11 @@ namespace sdkmath {
 
             MixedNumber(Integer base, Fraction fraction);
 
-            Integer getBase(void);
+            MixedNumber(long base, long numerator, long denominator);
 
-            Fraction getFraction(void);
+            Integer getBase(void) const;
+
+            Fraction getFraction(void) const;
 
         };
 

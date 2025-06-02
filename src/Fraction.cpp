@@ -12,6 +12,9 @@ void Fraction::validateDenominator(void) {
 Fraction::Fraction(Integer numerator, Integer denominator) : numerator(numerator), 
         denominator(denominator) { validateDenominator(); }
 
+Fraction::Fraction(long numerator, long denominator) : numerator(numerator),
+        denominator(denominator) { validateDenominator(); }
+
 Integer Fraction::getNumerator(void) const { return this->numerator; }
 
 Integer Fraction::getDenominator(void) const { return this->denominator; }

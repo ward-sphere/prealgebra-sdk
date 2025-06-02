@@ -23,6 +23,11 @@ MixedNumber::MixedNumber(Integer base, Fraction fraction) : base(base),
     checkProperFraction();
 }
 
-Integer MixedNumber::getBase() { return this->base; }
+MixedNumber::MixedNumber(long base, long numerator, long denominator) : base(base),
+        fraction(numerator, denominator) {
+    checkProperFraction();
+}
 
-Fraction MixedNumber::getFraction() { return this->fraction; }
+Integer MixedNumber::getBase() const { return this->base; }
+
+Fraction MixedNumber::getFraction() const { return this->fraction; }
