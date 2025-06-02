@@ -80,5 +80,6 @@ Fraction BasicNumberSimplifier::simplifyFraction(Fraction f) {
         }
     }
 
-    return Fraction(Integer(resNumeratorValue), Integer(resDenominatorValue));
+    return Fraction(Integer(resNumeratorValue * (f.isNegative() ? -1 : 1)), 
+            Integer(resDenominatorValue));
 }

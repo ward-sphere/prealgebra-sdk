@@ -22,3 +22,7 @@ target_link_libraries(number_simplifier_test gtest gtest_main)
 add_executable(number_translator_test include/Integer.hpp include/Fraction.hpp include/MixedNumber.hpp include/BasicNumberTranslator.hpp
         src/Integer.cpp src/Fraction.cpp src/MixedNumber.cpp src/BasicNumberTranslator.cpp test/INumberTranslatorTest.cpp)
 target_link_libraries(number_translator_test gtest gtest_main)
+
+add_executable(negative_number_test include/Integer.hpp include/Fraction.hpp include/MixedNumber.hpp
+        src/Integer.cpp src/Fraction.cpp src/MixedNumber.cpp test/NegativeNumberTest.cpp)
+target_link_libraries(negative_number_test gtest gtest_main)

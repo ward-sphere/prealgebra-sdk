@@ -16,7 +16,13 @@ namespace sdkmath {
 
             Fraction fraction;
 
+            bool negative = false;
+
             void checkProperFraction(void);
+
+            void validateNegatives(void);
+
+            void validateMixedNumber(void);
 
         public:
 
@@ -27,6 +33,8 @@ namespace sdkmath {
             Integer getBase(void) const;
 
             Fraction getFraction(void) const;
+
+            bool isNegative(void) const;
 
             bool operator==(const MixedNumber& other) const;
 
