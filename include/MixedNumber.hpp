@@ -20,7 +20,7 @@ namespace sdkmath {
 
             MixedNumber(Integer base, Fraction fraction);
 
-            MixedNumber(long base, long numerator, long denominator);
+            MixedNumber(Integer base, Integer numerator, Integer denominator);
 
             Integer getBase(void) const;
 

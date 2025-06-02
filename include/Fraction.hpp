@@ -17,8 +17,6 @@ namespace sdkmath {
 
             Fraction(Integer numerator, Integer denominator);
 
-            Fraction(long numerator, long denominator);
-
             Integer getNumerator(void) const;
 
             Integer getDenominator(void) const;

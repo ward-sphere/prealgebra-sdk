@@ -7,40 +7,40 @@ using namespace sdkmath::prealgebra;
 INumberSimplifier& simplifier = *new BasicNumberSimplifier();
 
 TEST(INumberSimplifierTest, TestPrimeFactorization1) {
-    Integer input = Integer(12);
-    std::vector<Integer> expectedOutput = { Integer(2), Integer(2), Integer(3) };
+    Integer input = 12;
+    std::vector<Integer> expectedOutput = { 2, 2, 3 };
     std::vector<Integer> actualOutput = simplifier.getPrimeFactors(input);
 
     ASSERT_EQ(expectedOutput, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestPrimeFactorization2) {
-    Integer input = Integer(14);
-    std::vector<Integer> expectedOutput = { Integer(2), Integer(7) };
+    Integer input = 14;
+    std::vector<Integer> expectedOutput = { 2, 7 };
     std::vector<Integer> actualOutput = simplifier.getPrimeFactors(input);
 
     ASSERT_EQ(expectedOutput, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestPrimeFactorization3) {
-    Integer input = Integer(19);
-    std::vector<Integer> expectedOutput = { Integer(19) };
+    Integer input = 19;
+    std::vector<Integer> expectedOutput = { 19 };
     std::vector<Integer> actualOutput = simplifier.getPrimeFactors(input);
 
     ASSERT_EQ(expectedOutput, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestPrimeFactorization4) {
-    Integer input = Integer(29);
-    std::vector<Integer> expectedOutput = { Integer(29) };
+    Integer input = 29;
+    std::vector<Integer> expectedOutput = { 29 };
     std::vector<Integer> actualOutput = simplifier.getPrimeFactors(input);
 
     ASSERT_EQ(expectedOutput, actualOutput);
 }
 
 TEST(INumberSimplifierTest, TestPrimeFactorization5) {
-    Integer input = Integer(30);
-    std::vector<Integer> expectedOutput = { Integer(2), Integer(3), Integer(5) };
+    Integer input = 30;
+    std::vector<Integer> expectedOutput = { 2, 3, 5 };
     std::vector<Integer> actualOutput = simplifier.getPrimeFactors(input);
 
     ASSERT_EQ(expectedOutput, actualOutput);

@@ -23,7 +23,7 @@ MixedNumber::MixedNumber(Integer base, Fraction fraction) : base(base),
     checkProperFraction();
 }
 
-MixedNumber::MixedNumber(long base, long numerator, long denominator) : base(base),
+MixedNumber::MixedNumber(Integer base, Integer numerator, Integer denominator) : base(base),
         fraction(numerator, denominator) {
     checkProperFraction();
 }
