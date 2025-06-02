@@ -11,7 +11,7 @@ namespace sdkmath {
 
             Integer numerator, denominator;
 
-            long value;
+            void validateDenominator(void);
 
         public:
 

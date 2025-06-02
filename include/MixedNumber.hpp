@@ -14,6 +14,8 @@ namespace sdkmath {
 
             Fraction fraction;
 
+            void checkProperFraction(void);
+
         public:
 
             MixedNumber(Integer base, Fraction fraction);

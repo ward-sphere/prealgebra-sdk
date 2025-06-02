@@ -7,6 +7,8 @@ namespace sdkmath {
 
         class Integer {
 
+            void setValue(long);
+
             long value;
 
         public:
