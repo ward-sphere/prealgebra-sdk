@@ -31,3 +31,10 @@ MixedNumber::MixedNumber(Integer base, Integer numerator, Integer denominator) :
 Integer MixedNumber::getBase() const { return this->base; }
 
 Fraction MixedNumber::getFraction() const { return this->fraction; }
+
+bool MixedNumber::operator==(const MixedNumber& other) const {
+    return getBase() == other.getBase()
+        && getFraction() == other.getFraction();
+}
+
+bool MixedNumber::operator!=(const MixedNumber& other) const { return !(*this == other); }

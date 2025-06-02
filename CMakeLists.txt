@@ -18,3 +18,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(number_simplifier_test include/Integer.hpp include/Fraction.hpp include/BasicNumberSimplifier.hpp
         src/Integer.cpp src/Fraction.cpp src/BasicNumberSimplifier.cpp test/INumberSimplifierTest.cpp)
 target_link_libraries(number_simplifier_test gtest gtest_main)
+
+add_executable(number_translator_test include/Integer.hpp include/Fraction.hpp include/MixedNumber.hpp include/BasicNumberTranslator.hpp
+        src/Integer.cpp src/Fraction.cpp src/MixedNumber.cpp src/BasicNumberTranslator.cpp test/INumberTranslatorTest.cpp)
+target_link_libraries(number_translator_test gtest gtest_main)

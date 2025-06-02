@@ -4,6 +4,8 @@
 #include <Integer.hpp>
 #include <Fraction.hpp>
 
+#include <iostream>
+
 namespace sdkmath {
 
     namespace prealgebra {
@@ -25,6 +27,10 @@ namespace sdkmath {
             Integer getBase(void) const;
 
             Fraction getFraction(void) const;
+
+            bool operator==(const MixedNumber& other) const;
+
+            bool operator!=(const MixedNumber& other) const;
 
         };
 
