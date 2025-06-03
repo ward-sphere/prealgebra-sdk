@@ -1,39 +1,53 @@
 #ifndef sdkmath_prealgebra_Fraction
 #define sdkmath_prealgebra_Fraction
 
-#include <Integer.hpp>
-
 namespace sdkmath {
 
     namespace prealgebra {
 
         class Fraction {
 
-            Integer numerator, denominator;
-
-            bool negative = false;
-
-            void validateFraction(void);
-
-            void validateDenominator(void);
-
-            void validateNegatives(void);
+            long numerator, denominator;
 
         public:
 
-            Fraction(Integer numerator, Integer denominator);
+            Fraction();
 
-            Integer getNumerator(void) const;
+            Fraction(long numerator, long denominator);
 
-            Integer getDenominator(void) const;
+            Fraction(long integer);
 
-            bool isNegative(void) const;
+            void setNumerator(long numerator) { this->numerator = numerator; }
 
-            bool operator==(const Fraction& other) const;
+            long getNumerator(void) const { return numerator; }
 
-            bool operator!=(const Fraction& other) const;
+            void setDenominator(long denominator);
+
+            long getDenominator(void) const { return denominator; }
+
+            Fraction getSimplified(void) const;
+
+            void simplify(void);
 
         };
+
+        inline bool operator==(const Fraction& lhs, const Fraction& rhs) {
+            Fraction simplified = lhs.getSimplified(), 
+                    otherSimplified = rhs.getSimplified();
+            
+            return simplified.getNumerator() == otherSimplified.getNumerator()
+                && simplified.getDenominator() == otherSimplified.getDenominator();
+        }
+        
+        inline bool operator!=(const Fraction& lhs, const Fraction& rhs) { return !(lhs == rhs); }
+        
+        inline bool operator==(const long& lhs, const Fraction& rhs) { return Fraction(lhs) == rhs; }
+        
+        inline bool operator!=(const long& lhs, const Fraction& rhs) { return !(lhs == rhs); }
+        
+        inline bool operator==(const Fraction& lhs, const long& rhs) { return rhs == lhs; }
+        
+        inline bool operator!=(const Fraction& lhs, const long& rhs) { return !(lhs == rhs); }
 
     };
 
