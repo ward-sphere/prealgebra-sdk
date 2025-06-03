@@ -1,6 +1,8 @@
 #ifndef sdkmath_prealgebra_Fraction
 #define sdkmath_prealgebra_Fraction
 
+#include <utility>
+
 namespace sdkmath {
 
     namespace prealgebra {
@@ -29,6 +31,8 @@ namespace sdkmath {
 
             void simplify(void);
 
+            std::pair<long, Fraction> getMixedNumber(void) const;
+
         };
 
         inline bool operator==(const Fraction& lhs, const Fraction& rhs) {
@@ -48,6 +52,23 @@ namespace sdkmath {
         inline bool operator==(const Fraction& lhs, const long& rhs) { return rhs == lhs; }
         
         inline bool operator!=(const Fraction& lhs, const long& rhs) { return !(lhs == rhs); }
+
+        inline Fraction operator*(const Fraction&lhs, const long& rhs) { 
+            return Fraction(
+                rhs * lhs.getNumerator(), 
+                rhs * lhs.getDenominator()
+            );
+        }
+
+        inline Fraction operator*(const long& lhs, const Fraction& rhs) { return rhs * lhs; }
+
+        inline Fraction operator+(const long& lhs, const Fraction& rhs) { return rhs; }
+
+        inline Fraction operator-(const long& lhs, const Fraction&rhs) { return lhs + -1 * rhs; }
+
+        inline Fraction operator+(const Fraction& lhs, const long& rhs) { return rhs + lhs; }
+
+        inline Fraction operator-(const Fraction& lhs, const long&rhs) { return lhs + -1 * rhs; }
 
     };
 

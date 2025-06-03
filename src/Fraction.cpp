@@ -43,6 +43,8 @@ static std::vector<long> getPrimaryDecomposition(long value) {
         if (isPrime) res.push_back(candidate);
     }
 
+    if (value < 0) res.insert(res.begin(), -1);
+
     return res;
 }
 
@@ -76,6 +78,11 @@ Fraction Fraction::getSimplified() const {
         }
     }
 
+    if (denominator < 0) {
+        numerator *= -1;
+        denominator *= -1;
+    }
+
     // reassign values
     return (numerator, denominator);
 }
@@ -84,4 +91,11 @@ void Fraction::simplify() {
     Fraction simplified = getSimplified();
     setDenominator(simplified.getDenominator());
     setNumerator(simplified.getNumerator());
+}
+
+std::pair<long, Fraction> Fraction::getMixedNumber() const {
+    return {
+        numerator / denominator,
+        Fraction(numerator % denominator, denominator)
+    };
 }

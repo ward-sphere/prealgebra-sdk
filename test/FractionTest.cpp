@@ -62,3 +62,52 @@ TEST(FractionTest, TestFractionSimplification7) {
 
     ASSERT_EQ(expected, actual);
 }
+
+TEST(FractionTest, TestFractionToMixedNumber1) {
+    Fraction input(7, 4);
+    std::pair<long, Fraction> expected = {1, Fraction(3, 4)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestFractionToMixedNumber2) {
+    Fraction input(15, 3);
+    std::pair<long, Fraction> expected = {5, Fraction(0, 3)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestFractionToMixedNumber3) {
+    Fraction input(-7, 4);
+    std::pair<long, Fraction> expected = {-1, Fraction(-3, 4)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestFractionToMixedNumber4) {
+    Fraction input(7, -4);
+    std::pair<long, Fraction> expected = {-1, Fraction(3, -4)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestFractionToMixedNumber5) {
+    Fraction input(7, -4);
+    std::pair<long, Fraction> expected = {-1, Fraction(-3, 4)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestFractionToMixedNumber6) {
+    Fraction input(-7, 4);
+    std::pair<long, Fraction> expected = {-1, Fraction(3, -4)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestFractionToMixedNumber7) {
+    Fraction input(-7, -4);
+    std::pair<long, Fraction> expected = {1, Fraction(3, 4)}, actual = input.getMixedNumber();
+
+    ASSERT_EQ(expected, actual);
+}
