@@ -94,6 +94,32 @@ namespace sdkmath {
 
         inline Fraction operator-=(Fraction& lhs, const Fraction& rhs) { lhs = lhs - rhs; }
 
+        inline Fraction operator*(const Fraction& lhs, const Fraction& rhs) { 
+            // TODO: Implement 
+            return lhs; 
+        }
+
+        inline Fraction operator*=(Fraction& lhs, const Fraction& rhs) { lhs = lhs * rhs; }
+
+        inline Fraction operator/(const Fraction& lhs, const Fraction& rhs) { 
+            // TODO: Implement 
+            return lhs; 
+        }
+
+        inline Fraction operator/=(Fraction& lhs, const Fraction& rhs) { lhs = lhs / rhs; }
+
+        inline Fraction operator/(const long& lhs, const Fraction& rhs) { 
+            // TODO: Implement 
+            return lhs; 
+        }
+
+        inline Fraction operator/(const Fraction& lhs, const long& rhs) { 
+            // TODO: Implement 
+            return lhs; 
+        }
+
+        inline Fraction operator/=(Fraction& lhs, const long& rhs) { lhs = lhs / rhs; }
+
     };
 
 };
