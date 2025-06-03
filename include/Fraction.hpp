@@ -59,9 +59,11 @@ namespace sdkmath {
         inline Fraction operator*(const Fraction&lhs, const long& rhs) { 
             return Fraction(
                 rhs * lhs.getNumerator(), 
-                rhs * lhs.getDenominator()
+                lhs.getDenominator()
             );
         }
+
+        inline Fraction operator*=(Fraction&lhs, const long& rhs) { lhs = lhs * rhs; }
 
         inline Fraction operator*(const long& lhs, const Fraction& rhs) { return rhs * lhs; }
 
@@ -71,7 +73,11 @@ namespace sdkmath {
 
         inline Fraction operator+(const Fraction& lhs, const long& rhs) { return rhs + lhs; }
 
+        inline Fraction operator+=(Fraction& lhs, const long& rhs) { lhs = rhs + lhs; }
+
         inline Fraction operator-(const Fraction& lhs, const long&rhs) { return lhs + -1 * rhs; }
+
+        inline Fraction operator-=(Fraction& lhs, const long& rhs) { lhs = lhs - rhs; }
 
         inline Fraction operator+(const Fraction& lhs, const Fraction& rhs) {
             long lcd = Fraction::lcd(lhs.getDenominator(), rhs.getDenominator());
@@ -82,7 +88,11 @@ namespace sdkmath {
             );
         }
 
+        inline Fraction operator+=(Fraction& lhs, const Fraction& rhs) { lhs = lhs + rhs; }
+
         inline Fraction operator-(const Fraction& lhs, const Fraction& rhs) { return lhs + -1 * rhs; }
+
+        inline Fraction operator-=(Fraction& lhs, const Fraction& rhs) { lhs = lhs - rhs; }
 
     };
 

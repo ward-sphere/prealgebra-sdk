@@ -125,3 +125,59 @@ TEST(FractionTest, TestLcd3) {
 
     ASSERT_EQ(expected, actual);
 }
+
+TEST(FractionTest, TestAddition1) {
+    Fraction lhs(5, 7), rhs(1, 7);
+    Fraction expected(6, 7), actual = lhs + rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition2) {
+    Fraction lhs(2, 3), rhs(1, 3);
+    Fraction expected(3, 3), actual = lhs + rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition3) {
+    Fraction lhs(3, 5), rhs(4, 5);
+    Fraction expected(7, 5), actual = lhs + rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition4) {
+    Fraction lhs(9, 11), rhs(2, 11);
+    Fraction expected(7, 11), actual = lhs - rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition5) {
+    Fraction lhs(5, 6), rhs(1, 6);
+    Fraction expected(2, 3), actual = lhs - rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition6) {
+    Fraction lhs(2, 3), rhs(1, 4);
+    Fraction expected(11, 12), actual = lhs + rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition7) {
+    Fraction lhs(7, 18), rhs(5, 12);
+    Fraction expected(29, 36), actual = lhs + rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestAddition8) {
+    Fraction lhs(25, 48), rhs(5, 36);
+    Fraction expected(55, 144), actual = lhs - rhs;
+
+    ASSERT_EQ(expected, actual);
+}
