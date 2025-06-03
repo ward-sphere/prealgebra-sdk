@@ -284,3 +284,10 @@ TEST(FractionTest, TestFractionMultiplication14) {
 
     ASSERT_EQ(expected, actual);
 }
+
+TEST(FractionTest, TestBoundary1) {
+    Fraction lhs(-502, 10), rhs(-43, 10);
+    Fraction expected(-459, 10), actual = lhs - rhs;
+
+    ASSERT_EQ(expected, actual);
+}

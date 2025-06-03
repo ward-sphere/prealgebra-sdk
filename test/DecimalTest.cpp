@@ -4,6 +4,85 @@
 
 using namespace sdkmath::prealgebra;
 
+TEST(DecimalTest, TestConstructor1) {
+    Decimal d("10.6");
+
+    ASSERT_EQ(3, d.mValues.size());
+    ASSERT_EQ(1, d.mValues[1]);
+    ASSERT_EQ(0, d.mValues[0]);
+    ASSERT_EQ(6, d.mValues[-1]);
+}
+
+TEST(DecimalTest, TestConstructor2) {
+    Decimal d("-10.6");
+
+    ASSERT_EQ(3, d.mValues.size());
+    ASSERT_EQ(-1, d.mValues[1]);
+    ASSERT_EQ(0, d.mValues[0]);
+    ASSERT_EQ(-6, d.mValues[-1]);
+}
+
+TEST(DecimalTest, TestConstructor3) {
+    Decimal d(Fraction(106, 10));
+
+    ASSERT_EQ(3, d.mValues.size());
+    ASSERT_EQ(1, d.mValues[1]);
+    ASSERT_EQ(0, d.mValues[0]);
+    ASSERT_EQ(6, d.mValues[-1]);
+}
+
+TEST(DecimalTest, TestConstructor4) {
+    Decimal d(Fraction(-106, 10));
+
+    ASSERT_EQ(3, d.mValues.size());
+    ASSERT_EQ(-1, d.mValues[1]);
+    ASSERT_EQ(0, d.mValues[0]);
+    ASSERT_EQ(-6, d.mValues[-1]);
+}
+
+TEST(DecimalTest, TestConstructor5) {
+    Decimal d(Fraction(-459, 10));
+
+    ASSERT_EQ(3, d.mValues.size());
+    ASSERT_EQ(-4, d.mValues[1]);
+    ASSERT_EQ(-5, d.mValues[0]);
+    ASSERT_EQ(-9, d.mValues[-1]);
+}
+
+TEST(DecimalTest, TestConstructor6) {
+    Decimal lhs(Fraction(-459, 10)), rhs("-45.9");
+
+    ASSERT_EQ(lhs, rhs);
+}
+
+TEST(DecimalTest, TestToFraction1) {
+    Decimal input("10.6");
+    Fraction expected(106, 10), actual = input.toFraction();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(DecimalTest, TestToFraction2) {
+    Decimal input("-10.6");
+    Fraction expected(-106, 10), actual = input.toFraction();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(DecimalTest, TestToFraction3) {
+    Decimal input("-50.2");
+    Fraction expected(-502, 10), actual = input.toFraction();
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(DecimalTest, TestToFraction4) {
+    Decimal input("-4.3");
+    Fraction expected(-43, 10), actual = input.toFraction();
+
+    ASSERT_EQ(expected, actual);
+}
+
 TEST(DecimalTest, TestEquality1) {
     Decimal lhs(Fraction(6, 10)), rhs("0.6");
 
@@ -223,6 +302,29 @@ TEST(DecimalTest, TestDecimalMultiplication12) {
 TEST(DecimalTest, TestDecimalMultiplication13) {
     Decimal lhs("5936.2"), rhs((long) 1000);
     Decimal expected("5.9362"), actual = lhs / rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(DecimalTest, BoundaryTest1) {
+    Decimal lhs("9999.9"), rhs("0.1");
+    Decimal expected((long) 10000), actual = lhs + rhs;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(DecimalTest, BoundaryTest2) {
+    Decimal lhs("-50.2"), rhs("-4.3");
+    Decimal expected("-45.9"), actual = lhs - rhs;
+
+    std::cout << "Actual: " << actual.toDouble() << " = " << actual.toFraction().getNumerator() << "/" << actual.toFraction().getDenominator() << std::endl;
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(DecimalTest, BoundaryTest3) {
+    Decimal lhs("-9999.9"), rhs("-0.1");
+    Decimal expected((long) -10000), actual = lhs + rhs;
 
     ASSERT_EQ(expected, actual);
 }

@@ -21,8 +21,6 @@ namespace sdkmath {
 
             DecimalContext ctx;
 
-            std::map<int, long> mValues;
-
             void convertLong(long);
 
             void convertDouble(double);
@@ -32,6 +30,8 @@ namespace sdkmath {
             void convertString(std::string);
 
         public:
+
+            std::map<int, long> mValues;
 
             Decimal(long value) { convertLong(value); }
 
