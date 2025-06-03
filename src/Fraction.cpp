@@ -26,13 +26,11 @@ void Fraction::setDenominator(long denominator) {
     this->denominator = denominator;
 }
 
-static std::vector<long> getPrimaryDecomposition(long value) {
+std::vector<long> Fraction::getPrimaryDecomposition(long value) {
     std::vector<long> res = {};
     
-    const double sqrt = std::sqrt(value);
     for (long candidate = 2; candidate <= value; candidate++) {
-        if (value % candidate != 0) continue;
-        if (candidate >= sqrt) break;
+        if (value < candidate && value % candidate != 0) continue;
         bool isPrime = true;
         for (long prime : res) {
             if (candidate % prime == 0) {
@@ -40,7 +38,12 @@ static std::vector<long> getPrimaryDecomposition(long value) {
                 break;
             }
         }
-        if (isPrime) res.push_back(candidate);
+        if (isPrime) {
+            while (value % candidate == 0) {
+                value /= candidate;
+                res.push_back(candidate);
+            }
+        }
     }
 
     if (value < 0) res.insert(res.begin(), -1);
@@ -55,22 +58,22 @@ Fraction Fraction::getSimplified() const {
 
     // two-pointers
     size_t numeratorPointer = 0, denominatorPointer = 0;
-    long numerator = 1, denominator = 1;
+    Fraction res(1, 1);
     while (numeratorPointer < numeratorPrimaryDecomposition.size()
-            && denominatorPointer < denominatorPrimaryDecomposition.size()) {
+            || denominatorPointer < denominatorPrimaryDecomposition.size()) {
         if (numeratorPointer >= numeratorPrimaryDecomposition.size()) {
-            denominator *= denominatorPrimaryDecomposition[denominatorPointer];
+            res.setDenominator(res.getDenominator() * denominatorPrimaryDecomposition[denominatorPointer]);
             denominatorPointer++;
         } else if (denominatorPointer >= denominatorPrimaryDecomposition.size()) {
-            numerator *= numeratorPrimaryDecomposition[numeratorPointer];
+            res.setNumerator(res.getNumerator() * numeratorPrimaryDecomposition[numeratorPointer]);
             numeratorPointer++;
         } else if (denominatorPrimaryDecomposition[denominatorPointer]
                 < numeratorPrimaryDecomposition[numeratorPointer]) {
-            denominator *= denominatorPrimaryDecomposition[denominatorPointer];
+            res.setDenominator(res.getDenominator() * denominatorPrimaryDecomposition[denominatorPointer]);
             denominatorPointer++;
         } else if (numeratorPrimaryDecomposition[numeratorPointer]
                 < denominatorPrimaryDecomposition[denominatorPointer]) {
-            numerator *= numeratorPrimaryDecomposition[numeratorPointer];
+            res.setNumerator(res.getNumerator() * numeratorPrimaryDecomposition[numeratorPointer]);
             numeratorPointer++;
         } else {
             numeratorPointer++;
@@ -79,12 +82,12 @@ Fraction Fraction::getSimplified() const {
     }
 
     if (denominator < 0) {
-        numerator *= -1;
-        denominator *= -1;
+        res.setNumerator(-res.getNumerator());
+        res.setDenominator(-res.getDenominator());
     }
 
     // reassign values
-    return (numerator, denominator);
+    return res;
 }
 
 void Fraction::simplify() {
@@ -93,9 +96,32 @@ void Fraction::simplify() {
     setNumerator(simplified.getNumerator());
 }
 
-std::pair<long, Fraction> Fraction::getMixedNumber() const {
-    return {
-        numerator / denominator,
-        Fraction(numerator % denominator, denominator)
-    };
+long Fraction::lcd(long lhs, long rhs) {
+    std::vector<long> lhsDecomposition = getPrimaryDecomposition(lhs),
+                      rhsDecomposition = getPrimaryDecomposition(rhs);
+    
+    long res = 1;
+    
+    size_t lPtr = 0, rPtr = 0;
+    while (lPtr < lhsDecomposition.size() || rPtr < rhsDecomposition.size()) {
+        if (lPtr >= lhsDecomposition.size()) {
+            res *= rhsDecomposition[rPtr];
+            rPtr++;
+        } else if (rPtr >= rhsDecomposition.size()) {
+            res *= lhsDecomposition[lPtr];
+            lPtr++;
+        } else if (lhsDecomposition[lPtr] < rhsDecomposition[rPtr]) {
+            res *= lhsDecomposition[lPtr];
+            lPtr++;
+        } else if (rhsDecomposition[rPtr] < lhsDecomposition[lPtr]) {
+            res *= rhsDecomposition[rPtr];
+            rPtr++;
+        } else {
+            res *= lhsDecomposition[lPtr];
+            lPtr++;
+            rPtr++;
+        }
+    }
+
+    return res;
 }

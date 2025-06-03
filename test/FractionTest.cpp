@@ -63,51 +63,65 @@ TEST(FractionTest, TestFractionSimplification7) {
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber1) {
-    Fraction input(7, 4);
-    std::pair<long, Fraction> expected = {1, Fraction(3, 4)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestPrimaryDecomposition1) {
+    long input = 3;
+    std::vector<long> expected = {3}, actual = Fraction::getPrimaryDecomposition(input);
 
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber2) {
-    Fraction input(15, 3);
-    std::pair<long, Fraction> expected = {5, Fraction(0, 3)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestPrimaryDecomposition2) {
+    long input = 4;
+    std::vector<long> expected = {2, 2}, actual = Fraction::getPrimaryDecomposition(input);
 
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber3) {
-    Fraction input(-7, 4);
-    std::pair<long, Fraction> expected = {-1, Fraction(-3, 4)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestPrimaryDecomposition3) {
+    long input = 6;
+    std::vector<long> expected = {2, 3}, actual = Fraction::getPrimaryDecomposition(input);
 
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber4) {
-    Fraction input(7, -4);
-    std::pair<long, Fraction> expected = {-1, Fraction(3, -4)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestPrimaryDecomposition4) {
+    long input = 15;
+    std::vector<long> expected = {3, 5}, actual = Fraction::getPrimaryDecomposition(input);
 
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber5) {
-    Fraction input(7, -4);
-    std::pair<long, Fraction> expected = {-1, Fraction(-3, 4)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestPrimaryDecomposition5) {
+    long input = 27;
+    std::vector<long> expected = {3, 3, 3}, actual = Fraction::getPrimaryDecomposition(input);
 
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber6) {
-    Fraction input(-7, 4);
-    std::pair<long, Fraction> expected = {-1, Fraction(3, -4)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestPrimaryDecomposition6) {
+    long input = 18;
+    std::vector<long> expected = {2, 3, 3}, actual = Fraction::getPrimaryDecomposition(input);
 
     ASSERT_EQ(expected, actual);
 }
 
-TEST(FractionTest, TestFractionToMixedNumber7) {
-    Fraction input(-7, -4);
-    std::pair<long, Fraction> expected = {1, Fraction(3, 4)}, actual = input.getMixedNumber();
+TEST(FractionTest, TestLcd1) {
+    long input1 = 3, input2 = 4;
+    long expected = 12, actual = Fraction::lcd(input1, input2);
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestLcd2) {
+    long input1 = 6, input2 = 15;
+    long expected = 30, actual = Fraction::lcd(input1, input2);
+
+    ASSERT_EQ(expected, actual);
+}
+
+TEST(FractionTest, TestLcd3) {
+    long input1 = 27, input2 = 18;
+    long expected = 54, actual = Fraction::lcd(input1, input2);
 
     ASSERT_EQ(expected, actual);
 }

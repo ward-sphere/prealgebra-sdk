@@ -1,6 +1,7 @@
 #ifndef sdkmath_prealgebra_Fraction
 #define sdkmath_prealgebra_Fraction
 
+#include <vector>
 #include <utility>
 
 namespace sdkmath {
@@ -12,7 +13,9 @@ namespace sdkmath {
             long numerator, denominator;
 
         public:
-
+            
+            static std::vector<long> getPrimaryDecomposition(long);
+            
             Fraction();
 
             Fraction(long numerator, long denominator);
@@ -31,7 +34,7 @@ namespace sdkmath {
 
             void simplify(void);
 
-            std::pair<long, Fraction> getMixedNumber(void) const;
+            static long lcd(long, long);
 
         };
 
@@ -69,6 +72,17 @@ namespace sdkmath {
         inline Fraction operator+(const Fraction& lhs, const long& rhs) { return rhs + lhs; }
 
         inline Fraction operator-(const Fraction& lhs, const long&rhs) { return lhs + -1 * rhs; }
+
+        inline Fraction operator+(const Fraction& lhs, const Fraction& rhs) {
+            long lcd = Fraction::lcd(lhs.getDenominator(), rhs.getDenominator());
+            return Fraction(
+                (lcd / lhs.getDenominator() * lhs.getNumerator()) 
+                + (lcd / rhs.getDenominator() * rhs.getNumerator())
+                , lcd
+            );
+        }
+
+        inline Fraction operator-(const Fraction& lhs, const Fraction& rhs) { return lhs + -1 * rhs; }
 
     };
 
