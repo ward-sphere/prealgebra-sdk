@@ -233,7 +233,7 @@ TEST(FractionTest, TestFractionMultiplication7) {
 
 TEST(FractionTest, TestFractionMultiplication8) {
     long lhs = 7; 
-    Fraction rhs(10, 27);
+    Fraction rhs(3, 5);
     Fraction expected(21, 5), actual = lhs * rhs;
 
     ASSERT_EQ(expected, actual);
@@ -278,7 +278,7 @@ TEST(FractionTest, TestFractionMultiplication13) {
 }
 
 TEST(FractionTest, TestFractionMultiplication14) {
-    long lhs = 86;
+    long lhs = 96;
     Fraction rhs(3, 4);
     Fraction expected(128), actual = lhs / rhs;
 

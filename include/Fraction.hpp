@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <utility>
+#include <stdexcept>
 
 namespace sdkmath {
 
@@ -63,7 +64,7 @@ namespace sdkmath {
             );
         }
 
-        inline Fraction operator*=(Fraction&lhs, const long& rhs) { lhs = lhs * rhs; }
+        inline void operator*=(Fraction&lhs, const long& rhs) { lhs = lhs * rhs; }
 
         inline Fraction operator*(const long& lhs, const Fraction& rhs) { return rhs * lhs; }
 
@@ -73,11 +74,11 @@ namespace sdkmath {
 
         inline Fraction operator+(const Fraction& lhs, const long& rhs) { return rhs + lhs; }
 
-        inline Fraction operator+=(Fraction& lhs, const long& rhs) { lhs = rhs + lhs; }
+        inline void operator+=(Fraction& lhs, const long& rhs) { lhs = rhs + lhs; }
 
         inline Fraction operator-(const Fraction& lhs, const long&rhs) { return lhs + -1 * rhs; }
 
-        inline Fraction operator-=(Fraction& lhs, const long& rhs) { lhs = lhs - rhs; }
+        inline void operator-=(Fraction& lhs, const long& rhs) { lhs = lhs - rhs; }
 
         inline Fraction operator+(const Fraction& lhs, const Fraction& rhs) {
             long lcd = Fraction::lcd(lhs.getDenominator(), rhs.getDenominator());
@@ -88,37 +89,45 @@ namespace sdkmath {
             );
         }
 
-        inline Fraction operator+=(Fraction& lhs, const Fraction& rhs) { lhs = lhs + rhs; }
+        inline void operator+=(Fraction& lhs, const Fraction& rhs) { lhs = lhs + rhs; }
 
         inline Fraction operator-(const Fraction& lhs, const Fraction& rhs) { return lhs + -1 * rhs; }
 
-        inline Fraction operator-=(Fraction& lhs, const Fraction& rhs) { lhs = lhs - rhs; }
+        inline void operator-=(Fraction& lhs, const Fraction& rhs) { lhs = lhs - rhs; }
 
         inline Fraction operator*(const Fraction& lhs, const Fraction& rhs) { 
-            // TODO: Implement 
-            return lhs; 
+            return Fraction(
+                lhs.getNumerator() * rhs.getNumerator(),
+                lhs.getDenominator() * rhs.getDenominator()
+            );
         }
 
-        inline Fraction operator*=(Fraction& lhs, const Fraction& rhs) { lhs = lhs * rhs; }
+        inline void operator*=(Fraction& lhs, const Fraction& rhs) { lhs = lhs * rhs; }
 
         inline Fraction operator/(const Fraction& lhs, const Fraction& rhs) { 
-            // TODO: Implement 
-            return lhs; 
+            if (rhs.getNumerator() == 0) throw std::invalid_argument("Cannot divide by 0");
+
+            return lhs * Fraction(
+                rhs.getDenominator(),
+                rhs.getNumerator()
+            ); 
         }
 
-        inline Fraction operator/=(Fraction& lhs, const Fraction& rhs) { lhs = lhs / rhs; }
+        inline void operator/=(Fraction& lhs, const Fraction& rhs) { lhs = lhs / rhs; }
 
         inline Fraction operator/(const long& lhs, const Fraction& rhs) { 
-            // TODO: Implement 
-            return lhs; 
+            if (rhs.getNumerator() == 0) throw std::invalid_argument("Cannot divide by 0");
+            
+            return Fraction(lhs) / rhs;
         }
 
         inline Fraction operator/(const Fraction& lhs, const long& rhs) { 
-            // TODO: Implement 
-            return lhs; 
+            if (rhs == 0) throw std::invalid_argument("Cannot divide by 0");
+            
+            return lhs / Fraction(rhs);
         }
 
-        inline Fraction operator/=(Fraction& lhs, const long& rhs) { lhs = lhs / rhs; }
+        inline void operator/=(Fraction& lhs, const long& rhs) { lhs = lhs / rhs; }
 
     };
 
