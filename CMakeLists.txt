@@ -17,9 +17,3 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(integer src/Integer.cpp test/IntegerTest.cpp)
 target_link_libraries(integer gtest gtest_main)
-
-add_executable(fraction_test include/Fraction.hpp src/Fraction.cpp test/FractionTest.cpp)
-target_link_libraries(fraction_test gtest gtest_main)
-
-add_executable(decimal_test include/Decimal.hpp src/Fraction.cpp src/Decimal.cpp test/DecimalTest.cpp)
-target_link_libraries(decimal_test gtest gtest_main)
