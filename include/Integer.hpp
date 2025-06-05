@@ -1,6 +1,8 @@
 #ifndef sdkmath_prealgebra_Integer
 #define sdkmath_prealgebra_Integer
 
+#include <memory>
+
 namespace sdkmath {
 
     namespace prealgebra {
@@ -18,27 +20,27 @@ namespace sdkmath {
 
             /// @brief get handler for generic arithmetic (add, multiply, etc); 
             /// could include any complex functionality that this not tied to an object
-            static IIntegerArithmetic& arithmetic();
+            static std::unique_ptr<IIntegerArithmetic> arithmetic;
 
         public:
 
             /// @brief set integer value
-            Integer(long) { this->value = value; }
+            Integer(long value) { this->value = value; }
 
             /// @brief retrieve integer value
             long getValue(void) const { return value; }
 
             /// @brief allow operator to access protected variables
-            friend Integer operator+(const Integer&lhs, const Integer&rhs);
+            friend Integer operator+(const Integer&, const Integer&);
 
             /// @brief allow operator to access protected variables
-            friend Integer operator-(const Integer&lhs, const Integer&rhs);
+            friend Integer operator-(const Integer&, const Integer&);
 
             /// @brief allow operator to access protected variables
-            friend Integer operator*(const Integer&lhs, const Integer&rhs);
+            friend Integer operator*(const Integer&, const Integer&);
 
             /// @brief allow operator to access protected variables
-            friend Integer operator/(const Integer&lhs, const Integer&rhs);
+            friend Integer operator/(const Integer&, const Integer&);
 
         };
 
@@ -83,19 +85,19 @@ namespace sdkmath {
 
         inline bool operator>=(const Integer& lhs, const Integer& rhs) { return !(lhs < rhs); }
 
-        inline Integer operator+(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic().add(lhs, rhs); }
+        inline Integer operator+(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->add(lhs, rhs); }
 
         inline void operator+=(Integer& lhs, const Integer& rhs) { lhs = lhs + rhs; }
 
-        inline Integer operator-(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic().subtract(lhs, rhs); }
+        inline Integer operator-(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->subtract(lhs, rhs); }
 
         inline void operator-=(Integer& lhs, const Integer& rhs) { lhs = lhs - rhs; }
 
-        inline Integer operator*(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic().multiply(lhs, rhs); }
+        inline Integer operator*(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->multiply(lhs, rhs); }
 
         inline void operator*=(Integer& lhs, const Integer& rhs) { lhs = lhs * rhs; }
 
-        inline Integer operator/(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic().divide(lhs, rhs); }
+        inline Integer operator/(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->divide(lhs, rhs); }
 
         inline void operator/=(Integer& lhs, const Integer& rhs) { lhs = lhs - rhs; }
 
