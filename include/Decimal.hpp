@@ -74,11 +74,17 @@ namespace sdkmath {
             /// @brief create a decimal from a string
             Decimal(std::string);
 
+            /// @brief create a decimal from a place-value map
+            Decimal(std::map<int, long>);
+
             /// @brief get decimal as string
-            std::string toString() { return decimal->toString(); }
+            std::string toString() const { return decimal->toString(); }
+
+            /// @brief get decimal as place-value vector
+            std::vector<std::pair<int, long>> toPlaceValueVector() const { return decimal->toPlaceValueVector(); }
 
             /// @brief get the value at a specific number place
-            long operator[](int place) { return decimal->operator[](place); }
+            long operator[](int place) const { return decimal->operator[](place); }
 
             /// START OPERATORS ACCESS TO STATIC CLASSES
 
