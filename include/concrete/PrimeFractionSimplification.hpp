@@ -1,5 +1,5 @@
-#ifndef sdkmath_prealgebra_concrete_BasicFractionSimplification
-#define sdkmath_prealgebra_concrete_BasicFractionSimplification
+#ifndef sdkmath_prealgebra_concrete_PrimeFractionSimplification
+#define sdkmath_prealgebra_concrete_PrimeFractionSimplification
 
 #include <Fraction.hpp>
 
@@ -12,7 +12,7 @@ namespace sdkmath {
 
         namespace concrete {
 
-            class BasicFractionSimplification : public IFractionSimplification {
+            class PrimeFractionSimplification : public IFractionSimplification {
 
             public:
 
