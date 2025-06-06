@@ -17,3 +17,6 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(integer src/Integer.cpp test/IntegerTest.cpp)
 target_link_libraries(integer gtest gtest_main)
+
+add_executable(fraction src/Fraction.cpp test/FractionTest.cpp)
+target_link_libraries(fraction gtest gtest_main)
