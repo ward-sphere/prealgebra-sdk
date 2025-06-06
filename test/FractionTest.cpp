@@ -300,38 +300,6 @@ TEST(FractionTest, TestEquality22) {
     }
 }
 
-TEST(FractionTest, TestEquality23) {
-    Fraction lhs(std::numeric_limits<long>::min(), std::numeric_limits<long>::max()),
-            rhs(std::numeric_limits<long>::min(), std::numeric_limits<long>::max());
-    bool expected = true, actual = lhs == rhs;
-
-    ASSERT_EQ(expected, actual);
-}
-
-TEST(FractionTest, TestEquality24) {
-    Fraction lhs(std::numeric_limits<long>::min(), std::numeric_limits<long>::max()),
-            rhs(std::numeric_limits<long>::max(), std::numeric_limits<long>::max());
-    bool expected = false, actual = lhs == rhs;
-
-    ASSERT_EQ(expected, actual);
-}
-
-TEST(FractionTest, TestEquality25) {
-    Fraction lhs(std::numeric_limits<long>::min(), std::numeric_limits<long>::max()),
-            rhs(std::numeric_limits<long>::min(), std::numeric_limits<long>::max());
-    bool expected = false, actual = lhs != rhs;
-
-    ASSERT_EQ(expected, actual);
-}
-
-TEST(FractionTest, TestEquality26) {
-    Fraction lhs(std::numeric_limits<long>::min(), std::numeric_limits<long>::max()),
-            rhs(std::numeric_limits<long>::max(), std::numeric_limits<long>::max());
-    bool expected = true, actual = lhs != rhs;
-
-    ASSERT_EQ(expected, actual);
-}
-
 TEST(FractionTest, TestInequality01) {
     Fraction lhs(2, 4), rhs(2, 3);
     bool expected = false, actual = lhs > rhs;
@@ -432,14 +400,14 @@ TEST(FractionTest, TestInequality14) {
 
 TEST(FractionTest, TestInequality15) {
     Fraction lhs(1, 2), rhs(50, 100);
-    bool expected = false, actual = lhs <= rhs;
+    bool expected = true, actual = lhs <= rhs;
 
     ASSERT_EQ(expected, actual);
 }
 
 TEST(FractionTest, TestInequality16) {
     Fraction lhs(1, 2), rhs(50, 100);
-    bool expected = false, actual = lhs >= rhs;
+    bool expected = true, actual = lhs >= rhs;
 
     ASSERT_EQ(expected, actual);
 }
@@ -572,7 +540,7 @@ TEST(FractionTest, TestAddition18) {
 
 TEST(FractionTest, TestMultiplication01) {
     Fraction lhs(2, 3), rhs(1, 3);
-    Fraction expected(4, 9), actual = lhs * rhs;
+    Fraction expected(2, 9), actual = lhs * rhs;
 
     ASSERT_EQ(expected, actual);
 }

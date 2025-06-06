@@ -11,15 +11,46 @@ namespace sdkmath {
 
             class BasicFractionArithmetic : public IFractionArithmetic {
 
+                IFractionSimplification& simplification;
+
             public:
 
-                Fraction add(const Fraction& lhs, const Fraction& rhs) { return lhs; }
+                BasicFractionArithmetic(IFractionSimplification& simplification) 
+                : simplification(simplification) {}
 
-                Fraction subtract(const Fraction& lhs, const Fraction& rhs) { return lhs; }
+                Fraction add(const Fraction& lhs, const Fraction& rhs) {
+                    Fraction tmpL(lhs), tmpR(rhs);
+                    simplification.lcd(tmpL, tmpR);
+                    return simplification.simplify(Fraction(
+                        tmpL.getNumerator() + tmpR.getNumerator(),
+                        tmpL.getDenominator()
+                    ));
+                }
 
-                Fraction multiply(const Fraction& lhs, const Fraction& rhs) { return lhs; }
+                Fraction subtract(const Fraction& lhs, const Fraction& rhs) {
+                    Fraction tmpL(lhs), tmpR(rhs);
+                    simplification.lcd(tmpL, tmpR);
+                    return simplification.simplify(Fraction(
+                        tmpL.getNumerator() - tmpR.getNumerator(),
+                        tmpL.getDenominator()
+                    ));
+                }
 
-                Fraction divide(const Fraction& lhs, const Fraction& rhs) { return lhs; }
+                Fraction multiply(const Fraction& lhs, const Fraction& rhs) {
+                    return simplification.simplify(Fraction(
+                        lhs.getNumerator() * rhs.getNumerator(),
+                        lhs.getDenominator() * rhs.getDenominator()
+                    ));
+                }
+
+                Fraction divide(const Fraction& lhs, const Fraction& rhs) {
+                    if (rhs.getNumerator() == 0) throw std::invalid_argument("Cannot divide by 0");
+
+                    return simplification.simplify(Fraction(
+                        lhs.getNumerator() * rhs.getDenominator(),
+                        lhs.getDenominator() * rhs.getNumerator()
+                    ));
+                }
 
             };
 

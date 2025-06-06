@@ -122,10 +122,10 @@ namespace sdkmath {
 
         inline bool operator==(const Fraction& lhs, const Fraction& rhs) {
             Fraction lS(Fraction::simplification->simplify(lhs)), 
-            rS(Fraction::simplification->simplify(lhs));
+            rS(Fraction::simplification->simplify(rhs));
 
-            return lhs.getNumerator() == rhs.getNumerator()
-                    && lhs.getDenominator() == rhs.getDenominator();
+            return lS.getNumerator() == rS.getNumerator()
+                    && lS.getDenominator() == rS.getDenominator();
         }
 
         inline bool operator!=(const Fraction& lhs, const Fraction& rhs) { return !(lhs == rhs); }
@@ -134,14 +134,14 @@ namespace sdkmath {
             Fraction tmpL = lhs.simplified(), tmpR = rhs.simplified();
             Fraction::simplification->lcd(tmpL, tmpR);
 
-            return lhs.getNumerator() < lhs.getDenominator();
+            return tmpL.getNumerator() < tmpR.getNumerator();
         }
 
         inline bool operator>(const Fraction& lhs, const Fraction& rhs) { return rhs < lhs; }
 
-        inline bool operator<=(const Fraction& lhs, const Fraction& rhs) { return !(rhs > lhs); }
+        inline bool operator<=(const Fraction& lhs, const Fraction& rhs) { return !(lhs > rhs); }
 
-        inline bool operator>=(const Fraction& lhs, const Fraction& rhs) { return !(rhs < lhs); }
+        inline bool operator>=(const Fraction& lhs, const Fraction& rhs) { return !(lhs < rhs); }
 
         inline Fraction operator+(const Fraction& lhs, const Fraction& rhs) { return Fraction::arithmetic->add(lhs, rhs); }
 

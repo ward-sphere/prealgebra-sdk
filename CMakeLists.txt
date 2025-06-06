@@ -20,3 +20,6 @@ target_link_libraries(integer gtest gtest_main)
 
 add_executable(fraction src/Fraction.cpp test/FractionTest.cpp)
 target_link_libraries(fraction gtest gtest_main)
+
+add_executable(basic_fraction_simplification  test/BasicFractionSimplificationTest.cpp)
+target_link_libraries(basic_fraction_simplification gtest gtest_main)

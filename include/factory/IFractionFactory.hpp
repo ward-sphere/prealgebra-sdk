@@ -15,7 +15,8 @@ namespace sdkmath {
 
             public:
 
-                std::unique_ptr<IFractionArithmetic> createFractionArithmetic() { return std::make_unique<concrete::BasicFractionArithmetic>(); }
+                std::unique_ptr<IFractionArithmetic> createFractionArithmetic() 
+                        { return std::make_unique<concrete::BasicFractionArithmetic>(*std::make_unique<concrete::BasicFractionSimplification>()); }
 
                 std::unique_ptr<IFractionSimplification> createFractionSimplification() { return std::make_unique<concrete::BasicFractionSimplification>(); }
 
