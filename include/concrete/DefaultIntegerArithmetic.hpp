@@ -1,5 +1,5 @@
-#ifndef sdkmath_prealgebra_BasicIntegerArithmetic
-#define sdkmath_prealgebra_BasicIntegerArithmetic
+#ifndef sdkmath_prealgebra_DefaultIntegerArithmetic
+#define sdkmath_prealgebra_DefaultIntegerArithmetic
 
 #include <Integer.hpp>
 
@@ -16,7 +16,7 @@ namespace sdkmath {
             /// us to make less changes to the CMakeLists when changing things out.
             /// if this had a test file, it would be used for helper functions; goal 
             /// is to decompose things as much as possible
-            class BasicIntegerArithmetic : public IIntegerArithmetic {
+            class DefaultIntegerArithmetic : public IIntegerArithmetic {
 
             public:
 

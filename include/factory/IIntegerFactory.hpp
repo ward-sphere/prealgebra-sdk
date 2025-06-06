@@ -2,7 +2,7 @@
 #define sdkmath_prealgebra_IIntegerFactory
 
 #include <Integer.hpp>
-#include <concrete/BasicIntegerArithmetic.hpp>
+#include <concrete/DefaultIntegerArithmetic.hpp>
 
 namespace sdkmath {
 
@@ -15,7 +15,7 @@ namespace sdkmath {
             public:
 
                 std::unique_ptr<IIntegerArithmetic> createIntegerArithmetic() { 
-                    return std::make_unique<concrete::BasicIntegerArithmetic>(); 
+                    return std::make_unique<concrete::DefaultIntegerArithmetic>(); 
                 }
 
             };

@@ -1,5 +1,5 @@
-#ifndef sdkmath_prealgebra_concrete_BasicFractionArithmetic
-#define sdkmath_prealgebra_concrete_BasicFractionArithmetic
+#ifndef sdkmath_prealgebra_concrete_DefaultFractionArithmetic
+#define sdkmath_prealgebra_concrete_DefaultFractionArithmetic
 
 #include <Fraction.hpp>
 
@@ -9,13 +9,13 @@ namespace sdkmath {
 
         namespace concrete {
 
-            class BasicFractionArithmetic : public IFractionArithmetic {
+            class DefaultFractionArithmetic : public IFractionArithmetic {
 
                 IFractionSimplification& simplification;
 
             public:
 
-                BasicFractionArithmetic(IFractionSimplification& simplification) 
+                DefaultFractionArithmetic(IFractionSimplification& simplification) 
                 : simplification(simplification) {}
 
                 Fraction add(const Fraction& lhs, const Fraction& rhs) {

@@ -1,9 +1,9 @@
-#include <concrete/PrimeFractionSimplification.hpp>
+#include <concrete/DefaultFractionSimplification.hpp>
 #include <gtest/gtest.h>
 
 using namespace sdkmath::prealgebra::concrete;
 
-PrimeFractionSimplification s;
+DefaultFractionSimplification s;
 
 TEST(BasicFractionSimplificationTest, TestPrimeFactorization01) {
     long input = 2;
