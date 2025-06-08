@@ -40,17 +40,17 @@ TEST(TranslatorTest, TestTranslateFraction4) {
 TEST(TranslatorTest, TestTranslateDecimal1) {
     Decimal input("51.91");
     ASSERT_THROW(Translator::dtoi(input), std::invalid_argument);
-    ASSERT_EQ(Fraction(5191, 100), input);
+    ASSERT_EQ(Fraction(5191, 100), Translator::dtof(input));
 }
 
 TEST(TranslatorTest, TestTranslateDecimal2) {
     Decimal input("-2");
     ASSERT_EQ(Integer(-2), Translator::dtoi(input));
-    ASSERT_EQ(Fraction(-2, 0), Translator::dtof(input));
+    ASSERT_EQ(Fraction(-2, 1), Translator::dtof(input));
 }
 
 TEST(TranslatorTest, TestTranslateDecimal3) {
     Decimal input("-87.25");
     ASSERT_THROW(Translator::dtoi(input), std::invalid_argument);
-    ASSERT_EQ(Fraction(-349/4), Translator::dtof(input));
+    ASSERT_EQ(Fraction(-349, 4), Translator::dtof(input));
 }

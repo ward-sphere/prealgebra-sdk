@@ -70,10 +70,10 @@ TEST(DecimalTest, TestConstructor07) {
 TEST(DecimalTest, TestConstructor08) {
     Decimal d("-.258");
 
+    ASSERT_EQ("-0.258", d.toString());
     ASSERT_EQ(-2, d[-1]);
     ASSERT_EQ(-5, d[-2]);
     ASSERT_EQ(-8, d[-3]);
-    ASSERT_EQ("-0.258", d.toString());
 }
 
 TEST(DecimalTest, TestEquality00) {
@@ -400,13 +400,13 @@ TEST(DecimalTest, TestInequality07) {
 
 TEST(DecimalTest, TestInequality08) {
     Decimal lhs("7206.5"), rhs("7206.55");
-    bool expected = true, actual = rhs < lhs;
+    bool expected = true, actual = lhs < rhs;
 
     ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestInequality09) {
-    Decimal lhs("7206.5"), rhs("7206.55");
+    Decimal lhs("7206.55"), rhs("7206.5");
     bool expected = false, actual = lhs < rhs;
 
     ASSERT_EQ(expected, actual);
@@ -477,14 +477,14 @@ TEST(DecimalTest, TestInequality18) {
 
 TEST(DecimalTest, TestInequality19) {
     Decimal lhs("7206.5"), rhs("7206.55");
-    bool expected = false, actual = rhs >= lhs;
+    bool expected = true, actual = lhs <= rhs;
 
     ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestInequality20) {
-    Decimal lhs("7206.5"), rhs("7206.55");
-    bool expected = true, actual = lhs >= rhs;
+    Decimal lhs("7206.55"), rhs("7206.5");
+    bool expected = false, actual = lhs <= rhs;
 
     ASSERT_EQ(expected, actual);
 }
@@ -554,14 +554,14 @@ TEST(DecimalTest, TestInequality29) {
 
 TEST(DecimalTest, TestInequality30) {
     Decimal lhs("7206.5"), rhs("7206.55");
-    bool expected = false, actual = rhs > lhs;
+    bool expected = true, actual = lhs < rhs;
 
     ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestInequality31) {
-    Decimal lhs("7206.5"), rhs("7206.55");
-    bool expected = true, actual = lhs > rhs;
+    Decimal lhs("7206.55"), rhs("7206.5");
+    bool expected = false, actual = lhs < rhs;
 
     ASSERT_EQ(expected, actual);
 }
@@ -631,13 +631,13 @@ TEST(DecimalTest, TestInequality40) {
 
 TEST(DecimalTest, TestInequality41) {
     Decimal lhs("7206.5"), rhs("7206.55");
-    bool expected = true, actual = rhs <= lhs;
+    bool expected = true, actual = lhs <= rhs;
 
     ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestInequality42) {
-    Decimal lhs("7206.5"), rhs("7206.55");
+    Decimal lhs("7206.55"), rhs("7206.5");
     bool expected = false, actual = lhs <= rhs;
 
     ASSERT_EQ(expected, actual);
@@ -708,7 +708,7 @@ TEST(DecimalTest, TestAddition07) {
 
 TEST(DecimalTest, TestAddition08) {
     Decimal lhs("-839.4"), rhs("-866.29");
-    Decimal expected("-26.89"), actual = lhs - rhs;
+    Decimal expected("26.89"), actual = lhs - rhs;
 
     ASSERT_EQ(expected, actual);
 }

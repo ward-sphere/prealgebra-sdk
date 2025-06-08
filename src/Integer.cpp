@@ -3,6 +3,6 @@
 
 using namespace sdkmath::prealgebra;
 
-factory::IIntegerFactory f;
+factory::IIntegerFactory integer_factory;
 
-std::unique_ptr<IIntegerArithmetic> Integer::arithmetic = f.createIntegerArithmetic();
+std::unique_ptr<IIntegerArithmetic> Integer::arithmetic = integer_factory.createIntegerArithmetic();

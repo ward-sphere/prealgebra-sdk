@@ -3,7 +3,7 @@
 
 using namespace sdkmath::prealgebra;
 
-factory::IFractionFactory f;
+factory::IFractionFactory fraction_factory;
 
-std::unique_ptr<IFractionArithmetic> Fraction::arithmetic = f.createFractionArithmetic();
-std::unique_ptr<IFractionSimplification> Fraction::simplification = f.createFractionSimplification();
+std::unique_ptr<IFractionArithmetic> Fraction::arithmetic = fraction_factory.createFractionArithmetic();
+std::unique_ptr<IFractionSimplification> Fraction::simplification = fraction_factory.createFractionSimplification();

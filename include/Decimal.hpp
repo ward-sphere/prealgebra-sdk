@@ -4,6 +4,7 @@
 #include <memory> 
 #include <stdexcept>
 #include <vector>
+#include <map>
 #include <algorithm>
 
 namespace sdkmath {
@@ -41,6 +42,8 @@ namespace sdkmath {
         class IDecimalArithmetic {
 
         public:
+
+            virtual long compare(const Decimal&, const Decimal&) = 0;
 
             /// @brief add two decimals
             virtual Decimal add(const Decimal&, const Decimal&) = 0;
@@ -114,53 +117,11 @@ namespace sdkmath {
 
         /// START OPERATORS
 
-        inline bool operator==(const Decimal& lhs, const Decimal& rhs) {
-            auto lhsMap = lhs.decimal->toPlaceValueVector(); std::sort(lhsMap.begin(), lhsMap.end());
-            auto rhsMap = rhs.decimal->toPlaceValueVector(); std::sort(rhsMap.begin(), rhsMap.end());
-
-            return lhsMap == rhsMap;
-        }
+        inline bool operator==(const Decimal& lhs, const Decimal& rhs) { return Decimal::arithmetic->compare(lhs, rhs) == 0; }
 
         inline bool operator!=(const Decimal& lhs, const Decimal& rhs) { return !(lhs == rhs); }
 
-        inline bool operator< (const Decimal& lhs, const Decimal& rhs) {
-            // order maps s.t. largest place comes first
-            auto lhsMap = lhs.decimal->toPlaceValueVector(); 
-            std::sort(lhsMap.begin(), lhsMap.end()); 
-            std::reverse(lhsMap.begin(), lhsMap.end());
-
-            auto rhsMap = rhs.decimal->toPlaceValueVector(); 
-            std::sort(rhsMap.begin(), rhsMap.end()); 
-            std::reverse(lhsMap.begin(), lhsMap.end());
-
-            // ensure maps have at least on value
-            if (lhsMap.size() == 0) lhsMap.push_back({0, 0});
-            if (rhsMap.size() == 0) rhsMap.push_back({0, 0});
-
-            // iterate through list until inequality found
-            auto lIt = lhsMap.begin();
-            auto lEnd = lhsMap.end();
-            auto rIt = rhsMap.begin();
-            auto rEnd = rhsMap.end();
-
-            while (lIt != lEnd || rIt != rEnd) {
-                if (lIt == lEnd) {
-                    return 0 < (*rIt).second;
-                } else if (rIt == rEnd) {
-                    return (*lIt).second < 0;
-                } else if ( (*lIt).first != (*rIt).first ) {
-                    return (*lIt).first < (*rIt).first;
-                } else {
-                    long tmpL = (*lIt).second;
-                    long tmpR = (*rIt).second;
-                    if (tmpL != tmpR) return tmpL < tmpR;
-                    ++lIt;
-                    ++rIt;
-                }
-            }
-
-            return false;
-        }
+        inline bool operator< (const Decimal& lhs, const Decimal& rhs) { return Decimal::arithmetic->compare(lhs, rhs) < 0; }
 
         inline bool operator> (const Decimal& lhs, const Decimal& rhs) { return rhs < lhs; }
 

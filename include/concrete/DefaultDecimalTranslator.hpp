@@ -7,7 +7,7 @@ namespace sdkmath {
 
     namespace prealgebra {
 
-        class DefaultDecimalTranslator : IDecimalTranslator {
+        class DefaultDecimalTranslator : public IDecimalTranslator {
 
         public:
 
