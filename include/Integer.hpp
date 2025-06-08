@@ -1,26 +1,18 @@
 #ifndef sdkmath_prealgebra_Integer
 #define sdkmath_prealgebra_Integer
 
-#include <memory>
+#include <Number.hpp>
 
 namespace sdkmath {
 
     namespace prealgebra {
 
         class Integer;
-        class IIntegerArithmetic;
-
         /// @brief proof of concept class for interface segregation
-        class Integer {
+        class Integer : public Number {
 
             /// @brief actual value of integer
             long value;
-
-        protected:
-
-            /// @brief get handler for generic arithmetic (add, multiply, etc); 
-            /// could include any complex functionality that this not tied to an object
-            static std::unique_ptr<IIntegerArithmetic> arithmetic;
 
         public:
 
@@ -30,78 +22,30 @@ namespace sdkmath {
             /// @brief retrieve integer value
             long getValue(void) const { return value; }
 
-            /// @brief allow operator to access protected variables
-            friend Integer operator+(const Integer&, const Integer&);
+            std::string toString() const { return std::to_string(value); }
 
-            /// @brief allow operator to access protected variables
-            friend Integer operator-(const Integer&, const Integer&);
+            std::map<int, long> getPlaceValueMap() const {
+                std::map<int, long> res;
+                
+                // set up values for iteration
+                long tmp = value;
+                bool negative = false;
+                if (tmp < 0) {
+                    tmp *= -1;
+                    negative = true;
+                }
 
-            /// @brief allow operator to access protected variables
-            friend Integer operator*(const Integer&, const Integer&);
+                for (int i = 0; tmp > 0; i++) {
+                    res[i] = (tmp % 10) * (negative ? -1 : 1);
+                    tmp /= 10;
+                }
 
-            /// @brief allow operator to access protected variables
-            friend Integer operator/(const Integer&, const Integer&);
+                return res;
+            }
 
-        };
-
-        /// @brief interface of interface-segregatable functionality that is defined in
-        /// the same compilation unit as the class it's using
-        class IIntegerArithmetic {
-
-        public:
-
-            /// @brief add two integers 
-            virtual Integer add(const Integer& lhs, const Integer& rhs) = 0;
-
-            /// @brief subtract two integers
-            virtual Integer subtract(const Integer& lhs, const Integer& rhs) = 0;
-
-            /// @brief multiply two integers
-            virtual Integer multiply(const Integer& lhs, const Integer& rhs) = 0;
-
-            /// @brief divide two integers
-            virtual Integer divide(const Integer& lhs, const Integer& rhs) = 0;
+            std::pair<long, long> toFractionalValues() const { return {value, 1}; }
 
         };
-
-        /// following in this class is just a collection of operators, each making one-
-        /// liner calls to the Integer or IIntegerArithmetic classes; all implementations
-        /// should be able to look like this using good enough interface segregation
-
-        /// setting up like this allows for independent components to be independently 
-        /// testable, while the larger test for integers focuses strictly on integration
-
-        /// START OPERATORS
-
-        inline bool operator==(const Integer& lhs, const Integer& rhs) { return lhs.getValue() == rhs.getValue(); }
-
-        inline bool operator!=(const Integer& lhs, const Integer& rhs) { return !(lhs == rhs); }
-
-        inline bool operator< (const Integer& lhs, const Integer& rhs) { return lhs.getValue() < rhs.getValue(); }
-
-        inline bool operator> (const Integer& lhs, const Integer& rhs) { return rhs < lhs; }
-
-        inline bool operator<=(const Integer& lhs, const Integer& rhs) { return !(lhs > rhs); }
-
-        inline bool operator>=(const Integer& lhs, const Integer& rhs) { return !(lhs < rhs); }
-
-        inline Integer operator+(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->add(lhs, rhs); }
-
-        inline void operator+=(Integer& lhs, const Integer& rhs) { lhs = lhs + rhs; }
-
-        inline Integer operator-(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->subtract(lhs, rhs); }
-
-        inline void operator-=(Integer& lhs, const Integer& rhs) { lhs = lhs - rhs; }
-
-        inline Integer operator*(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->multiply(lhs, rhs); }
-
-        inline void operator*=(Integer& lhs, const Integer& rhs) { lhs = lhs * rhs; }
-
-        inline Integer operator/(const Integer& lhs, const Integer& rhs) { return Integer::arithmetic->divide(lhs, rhs); }
-
-        inline void operator/=(Integer& lhs, const Integer& rhs) { lhs = lhs - rhs; }
-
-        /// END OPERATORS
 
     };
 

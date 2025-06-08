@@ -16,25 +16,13 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# add_executable(integer src/Integer.cpp test/IntegerTest.cpp)
-# target_link_libraries(integer gtest gtest_main)
-# 
-# add_executable(fraction src/Fraction.cpp test/FractionTest.cpp)
-# target_link_libraries(fraction gtest gtest_main)
-# 
-add_executable(translator 
-        src/Integer.cpp
-        src/Fraction.cpp
-        src/Decimal.cpp src/DefaultDecimalRepresentation.cpp 
-        src/Translator.cpp src/DefaultFractionTranslator.cpp 
-        test/TranslatorTest.cpp)
-target_link_libraries(translator gtest gtest_main)
+add_executable(integer src/Number.cpp test/IntegerTest.cpp)
+target_link_libraries(integer gtest gtest_main)
 
-add_executable(decimal 
-        src/Fraction.cpp
-        src/Decimal.cpp src/DefaultDecimalRepresentation.cpp 
-        src/Translator.cpp src/DefaultFractionTranslator.cpp 
-        test/DecimalTest.cpp)
+add_executable(fraction src/Number.cpp src/Fraction.cpp test/FractionTest.cpp)
+target_link_libraries(fraction gtest gtest_main)
+
+add_executable(decimal src/Number.cpp src/Decimal.cpp test/DecimalTest.cpp)
 target_link_libraries(decimal gtest gtest_main)
 
 add_executable(regex_decimal_string_parser test/RegexDecimalStringParserTest.cpp)

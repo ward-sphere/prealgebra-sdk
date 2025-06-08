@@ -1,7 +1,7 @@
 #ifndef sdkmath_prealgebra_concrete_RegexDecimalStringParser
 #define sdkmath_prealgebra_concrete_RegexDecimalStringParser
 
-#include <concrete/DefaultDecimalRepresentation.hpp>
+#include <Decimal.hpp>
 
 #include <iterator>
 #include <regex>
@@ -126,7 +126,7 @@ namespace sdkmath {
                     return res;
                 }
 
-                void processPrefix(std::string prefix, std::vector<std::pair<int, long>>& table, bool negative) {
+                void processPrefix(std::string prefix, std::map<int, long>& table, bool negative) {
 #ifdef DEBUG
                     std::cout << "-> RegexDecimalStringParser::processPrefix(" << prefix 
                         << ", std::vector<std::pair<int, long>>&, " << negative << ")" << std::endl;
@@ -138,7 +138,7 @@ namespace sdkmath {
 
                         int k = l - i - 1;
                         long v = value * (negative ? -1 : 1);
-                        table.push_back({k, v});
+                        table[k] = v;
 #ifdef DEBUG
                         std::cout << "table[" << k << "] = " << v << std::endl;
 #endif
@@ -148,7 +148,7 @@ namespace sdkmath {
 #endif
                 }
 
-                void processSuffix(std::string suffix, std::vector<std::pair<int, long>>& table, bool negative) {
+                void processSuffix(std::string suffix, std::map<int, long>& table, bool negative) {
 #ifdef DEBUG
                     std::cout << "-> RegexDecimalStringParser::processSuffix(" << suffix 
                         << ", std::vexctor<std::pair<int, long>>&, " << negative << ")" << std::endl;
@@ -160,7 +160,7 @@ namespace sdkmath {
 
                         int k = -(i + 1);
                         long v = value * (negative ? -1 : 1);
-                        table.push_back({k, v});
+                        table[k] = v;
 #ifdef DEBUG
                         std::cout << "table[" << k << "] = " << v << std::endl;
 #endif
@@ -170,11 +170,11 @@ namespace sdkmath {
 #endif
                 }
 
-                std::vector<std::pair<int, long>> fromString(std::string s) {
+                std::map<int, long> fromString(std::string s) {
 #ifdef DEBUG
                     std::cout << "-> RegexDecimalStringParser::fromString(" << s << ")" << std::endl;
 #endif
-                    std::vector<std::pair<int, long>> res;
+                    std::map<int, long> res;
 
                     bool negative = isNegative(s);
                     processPrefix(matchPrefix(s), res, negative);

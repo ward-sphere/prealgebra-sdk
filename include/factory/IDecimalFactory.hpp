@@ -2,8 +2,7 @@
 #define sdkmath_prealgebra_factory_IDecimalFactory
 
 #include <Decimal.hpp>
-#include <concrete/DefaultDecimalRepresentation.hpp>
-#include <concrete/FractionDecimalArithmetic.hpp>
+#include <concrete/RegexDecimalStringParser.hpp>
 
 namespace sdkmath {
 
@@ -15,12 +14,8 @@ namespace sdkmath {
 
             public:
 
-                std::unique_ptr<IDecimalRepresentation> createDecimalRepresentation() {
-                    return std::make_unique<concrete::DefaultDecimalRepresentation>();
-                }
-
-                std::unique_ptr<IDecimalArithmetic> createDecimalArithmetic() {
-                    return std::make_unique<concrete::FractionDecimalArithmetic>();
+                std::unique_ptr<IDecimalStringParser> createDecimalStringParser() {
+                    return std::make_unique<concrete::RegexDecimalStringParser>();
                 }
 
             };

@@ -1,7 +1,9 @@
 #ifndef sdkmath_prealgebra_Fraction
 #define sdkmath_prealgebra_Fraction
 
-#include <memory> 
+#include <Number.hpp>
+
+#include <sstream>
 #include <stdexcept>
 
 namespace sdkmath {
@@ -9,27 +11,7 @@ namespace sdkmath {
     namespace prealgebra {
 
         class Fraction;
-        class IFractionArithmetic;
         class IFractionSimplification;
-
-        /// @brief basic fraction arithmetic
-        class IFractionArithmetic {
-
-        public:
-
-            /// @brief fraction addition 
-            virtual Fraction add(const Fraction&, const Fraction&) = 0;
-
-            /// @brief fraction subtraction
-            virtual Fraction subtract(const Fraction&, const Fraction&) = 0;
-
-            /// @brief fraction multiplication
-            virtual Fraction multiply(const Fraction&, const Fraction&) = 0;
-
-            /// @brief fraction division
-            virtual Fraction divide(const Fraction&, const Fraction&) = 0;
-
-        };
 
         /// @brief tools for fraction simplification
         class IFractionSimplification {
@@ -45,7 +27,7 @@ namespace sdkmath {
         };
 
         /// @brief unit defining high-level details of fractions
-        class Fraction {
+        class Fraction : public Number {
 
             /// @brief fraction numerator
             long numerator = 0;
@@ -53,12 +35,6 @@ namespace sdkmath {
             /// @brief fraction denominator; non-zero
             long denominator = 1;
 
-        protected:
-
-            /// @brief fraction addition, multiplication, etc
-            static std::unique_ptr<IFractionArithmetic> arithmetic;
-
-            /// @brief simplify fractions; change fraction to a base
             static std::unique_ptr<IFractionSimplification> simplification;
 
         public:
@@ -81,9 +57,6 @@ namespace sdkmath {
                 this->denominator = denominator;
             }
 
-            /// @brief numerator-only constructor; denominator will be default of 1
-            Fraction(long numerator) { this->numerator = numerator; }
-
             /// @brief numerator getter
             long getNumerator(void) const { return numerator; }
 
@@ -100,66 +73,23 @@ namespace sdkmath {
                 this->denominator = tmp.getDenominator();
             }
 
-            /// START OPERATORS ACCESS TO STATIC ADDITION
+            std::string toString() const {
+                std::stringstream ss;
+                ss << getNumerator() << "/" << getDenominator();
+                return ss.str();
+            }
 
-            friend bool operator==(const Fraction&, const Fraction&);
-
-            friend bool operator<(const Fraction&, const Fraction&);
-
-            friend Fraction operator+(const Fraction&, const Fraction&);
-
-            friend Fraction operator-(const Fraction&, const Fraction&);
-
-            friend Fraction operator*(const Fraction&, const Fraction&);
-
-            friend Fraction operator/(const Fraction&, const Fraction&);
-
-            /// END OPERATORS ACCESS TO STATIC CLASSES
+            std::pair<long, long> toFractionalValues() const { return {numerator, denominator}; }
+            
+            Fraction& operator=(const Fraction& other) {
+                if (this != &other) {
+                    numerator = other.getNumerator();
+                    denominator = other.getDenominator();
+                }
+                return *this;
+            }
 
         };
-
-        /// START OPERATORS
-
-        inline bool operator==(const Fraction& lhs, const Fraction& rhs) {
-            Fraction lS(Fraction::simplification->simplify(lhs)), 
-            rS(Fraction::simplification->simplify(rhs));
-
-            return lS.getNumerator() == rS.getNumerator()
-                    && lS.getDenominator() == rS.getDenominator();
-        }
-
-        inline bool operator!=(const Fraction& lhs, const Fraction& rhs) { return !(lhs == rhs); }
-
-        inline bool operator<(const Fraction& lhs, const Fraction& rhs) {
-            Fraction tmpL = lhs.simplified(), tmpR = rhs.simplified();
-            Fraction::simplification->lcd(tmpL, tmpR);
-
-            return tmpL.getNumerator() < tmpR.getNumerator();
-        }
-
-        inline bool operator>(const Fraction& lhs, const Fraction& rhs) { return rhs < lhs; }
-
-        inline bool operator<=(const Fraction& lhs, const Fraction& rhs) { return !(lhs > rhs); }
-
-        inline bool operator>=(const Fraction& lhs, const Fraction& rhs) { return !(lhs < rhs); }
-
-        inline Fraction operator+(const Fraction& lhs, const Fraction& rhs) { return Fraction::arithmetic->add(lhs, rhs); }
-
-        inline void operator+=(Fraction& lhs, const Fraction& rhs) { lhs = lhs + rhs; }
-
-        inline Fraction operator-(const Fraction& lhs, const Fraction& rhs) { return Fraction::arithmetic->subtract(lhs, rhs); }
-
-        inline void operator-=(Fraction& lhs, const Fraction& rhs) { lhs = lhs - rhs; }
-
-        inline Fraction operator*(const Fraction& lhs, const Fraction& rhs) { return Fraction::arithmetic->multiply(lhs, rhs); }
-
-        inline void operator*=(Fraction& lhs, const Fraction& rhs) { lhs = lhs * rhs; }
-
-        inline Fraction operator/(const Fraction& lhs, const Fraction& rhs) { return Fraction::arithmetic->divide(lhs, rhs); }
-
-        inline void operator/=(Fraction& lhs, const Fraction& rhs) { lhs = lhs / rhs; }
-
-        /// END OPERATORS
 
     };
 
