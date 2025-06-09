@@ -653,185 +653,185 @@ TEST(DecimalTest, TestInequality43) {
 TEST(DecimalTest, TestAddition00) {
     Decimal lhs("839.4"), rhs("866.29");
     Decimal expected("1705.69");
-    std::unique_ptr<Number> actual = lhs + rhs;
+    Number& actual = lhs + rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition01) {
     Decimal lhs("839.4"), rhs("-866.29");
     Decimal expected("-26.89");
-    std::unique_ptr<Number> actual = lhs + rhs;
+    Number& actual = lhs + rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition02) {
     Decimal lhs("-839.4"), rhs("-866.29");
     Decimal expected("-1705.69");
-    std::unique_ptr<Number> actual = lhs + rhs;
+    Number& actual = lhs + rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition03) {
     Decimal lhs("-839.4"), rhs("866.29");
     Decimal expected("26.89");
-    std::unique_ptr<Number> actual = lhs + rhs;
+    Number& actual = lhs + rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition04) {
     Decimal lhs("-839.4"), rhs("0");
     Decimal expected = lhs;
-    std::unique_ptr<Number> actual = lhs + rhs;
+    Number& actual = lhs + rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition05) {
     Decimal lhs("-839.4"), rhs("0");
     Decimal expected = lhs;
-    std::unique_ptr<Number> actual = lhs + rhs;
+    Number& actual = lhs + rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition06) {
     Decimal lhs("839.4"), rhs("866.29");
     Decimal expected("-26.89");
-    std::unique_ptr<Number> actual = lhs - rhs;
+    Number& actual = lhs - rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition07) {
     Decimal lhs("839.4"), rhs("-866.29");
     Decimal expected("1705.69");
-    std::unique_ptr<Number> actual = lhs - rhs;
+    Number& actual = lhs - rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition08) {
     Decimal lhs("-839.4"), rhs("-866.29");
     Decimal expected("26.89");
-    std::unique_ptr<Number> actual = lhs - rhs;
+    Number& actual = lhs - rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition09) {
     Decimal lhs("-839.4"), rhs("866.29");
     Decimal expected("-1705.69");
-    std::unique_ptr<Number> actual = lhs - rhs;
+    Number& actual = lhs - rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition10) {
     Decimal lhs("-839.4"), rhs("0");
     Decimal expected = lhs;
-    std::unique_ptr<Number> actual = lhs - rhs;
+    Number& actual = lhs - rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestAddition11) {
     Decimal lhs("-839.4"), rhs("0");
     Decimal expected("839.4");
-    std::unique_ptr<Number> actual = rhs - lhs;
+    Number& actual = rhs - lhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication00) {
     Decimal lhs("839.4"), rhs("866.29");
     Decimal expected("727163.826");
-    std::unique_ptr<Number> actual = lhs * rhs;
+    Number& actual = lhs * rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication01) {
     Decimal lhs("839.4"), rhs("-866.29");
     Decimal expected("-727163.826");
-    std::unique_ptr<Number> actual = lhs * rhs;
+    Number& actual = lhs * rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication02) {
     Decimal lhs("-839.4"), rhs("-866.29");
     Decimal expected("727163.826");
-    std::unique_ptr<Number> actual = lhs * rhs;
+    Number& actual = lhs * rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication03) {
     Decimal lhs("-839.4"), rhs("866.29");
     Decimal expected("-727163.826");
-    std::unique_ptr<Number> actual = lhs * rhs;
+    Number& actual = lhs * rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication04) {
     Decimal lhs("-839.4"), rhs("1");
     Decimal expected = lhs;
-    std::unique_ptr<Number> actual = lhs * rhs;
+    Number& actual = lhs * rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication05) {
     Decimal lhs("-839.4"), rhs("1");
     Decimal expected = lhs;
-    std::unique_ptr<Number> actual = lhs * rhs;
+    Number& actual = lhs * rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication06) {
     Decimal lhs("375.68"), rhs("117.4");
     Decimal expected("3.2");
-    std::unique_ptr<Number> actual = lhs / rhs;
+    Number& actual = lhs / rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication07) {
     Decimal lhs("375.68"), rhs("-117.4");
     Decimal expected("-3.2");
-    std::unique_ptr<Number> actual = lhs / rhs;
+    Number& actual = lhs / rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication08) {
     Decimal lhs("-375.68"), rhs("-117.4");
     Decimal expected("3.2");
-    std::unique_ptr<Number> actual = lhs / rhs;
+    Number& actual = lhs / rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication09) {
     Decimal lhs("-375.68"), rhs("117.4");
     Decimal expected("-3.2");
-    std::unique_ptr<Number> actual = lhs / rhs;
+    Number& actual = lhs / rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication10) {
     Decimal lhs("375.68"), rhs("1");
     Decimal expected = lhs;
-    std::unique_ptr<Number> actual = lhs / rhs;
+    Number& actual = lhs / rhs;
 
-    ASSERT_EQ(expected, *actual);
+    ASSERT_EQ(expected, actual);
 }
 
 TEST(DecimalTest, TestMultiplication11) {
