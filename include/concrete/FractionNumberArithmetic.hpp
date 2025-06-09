@@ -18,6 +18,8 @@ namespace sdkmath {
 
             class FractionNumberArithmetic : public INumberArithmetic {
 
+                std::vector<std::shared_ptr<Number>> numbers_lifetime;
+
                 utility::IIntegerProperties& properties
                     = factory::IntegerPropertiesFactory().createIntegerProperties();
 
@@ -59,7 +61,7 @@ namespace sdkmath {
                     return f.first.first - f.second.first;
                 }
 
-                std::unique_ptr<Number> add(const Number& lhs, const Number& rhs) {
+                Number& add(const Number& lhs, const Number& rhs) {
                     auto f = common(lhs, rhs);
                     change_base(f.first, f.second);
                     
@@ -69,11 +71,12 @@ namespace sdkmath {
                     };
                     simplify(tmp);
 
-                    std::unique_ptr<Number> res = std::make_unique<Fraction>(tmp.first, tmp.second);
-                    return res;
+                    std::shared_ptr<Number> res = std::make_shared<Fraction>(tmp.first, tmp.second);
+                    numbers_lifetime.push_back(res);
+                    return *res;
                 }
 
-                std::unique_ptr<Number> subtract(const Number& lhs, const Number& rhs) {
+                Number& subtract(const Number& lhs, const Number& rhs) {
                     auto f = common(lhs, rhs);
                     change_base(f.first, f.second);
                     
@@ -83,11 +86,12 @@ namespace sdkmath {
                     };
                     simplify(tmp);
 
-                    std::unique_ptr<Number> res = std::make_unique<Fraction>(tmp.first, tmp.second);
-                    return res;
+                    std::shared_ptr<Number> res = std::make_shared<Fraction>(tmp.first, tmp.second);
+                    numbers_lifetime.push_back(res);
+                    return *res;
                 }
 
-                std::unique_ptr<Number> multiply(const Number& lhs, const Number& rhs) {
+                Number& multiply(const Number& lhs, const Number& rhs) {
                     auto f = common(lhs, rhs);
                     
                     std::pair<long, long> tmp = {
@@ -96,11 +100,12 @@ namespace sdkmath {
                     };
                     simplify(tmp);
 
-                    std::unique_ptr<Number> res = std::make_unique<Fraction>(tmp.first, tmp.second);
-                    return res;
+                    std::shared_ptr<Number> res = std::make_shared<Fraction>(tmp.first, tmp.second);
+                    numbers_lifetime.push_back(res);
+                    return *res;
                 }
 
-                std::unique_ptr<Number> divide(const Number& lhs, const Number& rhs) {
+                Number& divide(const Number& lhs, const Number& rhs) {
                     auto f = common(lhs, rhs);
 
                     if (f.second.first == 0) throw std::invalid_argument("Cannot divide by number " + rhs.toString());
@@ -111,8 +116,9 @@ namespace sdkmath {
                     };
                     simplify(tmp);
 
-                    std::unique_ptr<Number> res = std::make_unique<Fraction>(tmp.first, tmp.second);
-                    return res;
+                    std::shared_ptr<Number> res = std::make_shared<Fraction>(tmp.first, tmp.second);
+                    numbers_lifetime.push_back(res);
+                    return *res;
                 }
 
             };
