@@ -11,7 +11,7 @@
 using namespace sdkmath::prealgebra;
 
 sdkmath::prealgebra::factory::IDecimalFactory decimal_factory;
-std::unique_ptr<IDecimalStringParser> string_parser = decimal_factory.createDecimalStringParser();
+IDecimalStringParser& Decimal::string_parser = decimal_factory.createDecimalStringParser();
 
 Decimal::Decimal(const Decimal& other) { operator=(other); }
 
@@ -19,7 +19,7 @@ Decimal::Decimal(std::string s) {
 #ifdef DDEBUG
     std::cout << "-> Decimal::Decimal(" << s << ")" << std::endl;
 #endif
-    decimal = string_parser->fromString(s);
+    decimal = string_parser.fromString(s);
 #ifdef DDEBUG
     std::cout << "<- Decimal::Decimal: " << toString() << std::endl;
 #endif
@@ -63,11 +63,11 @@ std::pair<long, long> addFractionHelper(std::vector<std::pair<long, long>>& frac
     if (fractions.size() == 1) return fractions[0];
     
     factory::IntegerPropertiesFactory integer_properties_factory;
-    std::unique_ptr<utility::IIntegerProperties> properties = integer_properties_factory.createIntegerProperties();
+    utility::IIntegerProperties& properties = integer_properties_factory.createIntegerProperties();
 
     std::pair<long, long> x = fractions.back(); fractions.pop_back();
     std::pair<long, long> y = fractions.back(); fractions.pop_back();
-    long lcd = properties->lcm(x.second, y.second);
+    long lcd = properties.lcm(x.second, y.second);
 
     fractions.push_back(
         {

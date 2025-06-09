@@ -24,6 +24,8 @@ namespace sdkmath {
 
         class Decimal : public Number {
 
+            static IDecimalStringParser& string_parser;
+
             std::map<int, long> decimal;
 
         public:

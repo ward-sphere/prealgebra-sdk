@@ -16,8 +16,9 @@ namespace sdkmath {
 
             public:
 
-                std::unique_ptr<utility::IIntegerProperties> createIntegerProperties() {
-                    return std::make_unique<concrete::PrimeFactorIntegerProperties>();
+                utility::IIntegerProperties& createIntegerProperties() {
+                    static concrete::PrimeFactorIntegerProperties integer_properties;
+                    return integer_properties;
                 }
 
             };

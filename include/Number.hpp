@@ -31,7 +31,7 @@ namespace sdkmath {
 
         class Number {
 
-            static std::unique_ptr<INumberArithmetic> arithmetic;
+            static INumberArithmetic& arithmetic;
 
         public:
 
@@ -53,11 +53,11 @@ namespace sdkmath {
 
         };
 
-        inline bool operator==(const Number& lhs, const Number& rhs) { return Number::arithmetic->compare(lhs, rhs) == 0; }
+        inline bool operator==(const Number& lhs, const Number& rhs) { return Number::arithmetic.compare(lhs, rhs) == 0; }
 
         inline bool operator!=(const Number& lhs, const Number& rhs) { return !(lhs == rhs); }
 
-        inline bool operator<(const Number& lhs, const Number& rhs) { return Number::arithmetic->compare(lhs, rhs) < 0; }
+        inline bool operator<(const Number& lhs, const Number& rhs) { return Number::arithmetic.compare(lhs, rhs) < 0; }
 
         inline bool operator>(const Number& lhs, const Number& rhs) { return rhs < lhs; }
 
@@ -65,13 +65,13 @@ namespace sdkmath {
 
         inline bool operator>=(const Number& lhs, const Number& rhs) { return !(lhs < rhs); }
 
-        inline std::unique_ptr<Number> operator+(const Number& lhs, const Number& rhs) { return Number::arithmetic->add(lhs, rhs); }
+        inline std::unique_ptr<Number> operator+(const Number& lhs, const Number& rhs) { return Number::arithmetic.add(lhs, rhs); }
 
-        inline std::unique_ptr<Number> operator-(const Number& lhs, const Number& rhs) { return Number::arithmetic->subtract(lhs, rhs); }
+        inline std::unique_ptr<Number> operator-(const Number& lhs, const Number& rhs) { return Number::arithmetic.subtract(lhs, rhs); }
 
-        inline std::unique_ptr<Number> operator*(const Number& lhs, const Number& rhs) { return Number::arithmetic->multiply(lhs, rhs); }
+        inline std::unique_ptr<Number> operator*(const Number& lhs, const Number& rhs) { return Number::arithmetic.multiply(lhs, rhs); }
 
-        inline std::unique_ptr<Number> operator/(const Number& lhs, const Number& rhs) { return Number::arithmetic->divide(lhs, rhs); }
+        inline std::unique_ptr<Number> operator/(const Number& lhs, const Number& rhs) { return Number::arithmetic.divide(lhs, rhs); }
 
         inline std::ostream& operator<<(std::ostream& os, const Number& number) {
             os << number.toString();

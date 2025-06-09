@@ -14,8 +14,9 @@ namespace sdkmath {
 
             public:
 
-                std::unique_ptr<IDecimalStringParser> createDecimalStringParser() {
-                    return std::make_unique<concrete::RegexDecimalStringParser>();
+                IDecimalStringParser& createDecimalStringParser() {
+                    static concrete::RegexDecimalStringParser string_parser;
+                    return string_parser;
                 }
 
             };

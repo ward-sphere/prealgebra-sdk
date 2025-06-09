@@ -14,8 +14,10 @@ namespace sdkmath {
 
             public:
 
-                std::unique_ptr<IFractionSimplification> createFractionSimplification() 
-                    { return std::make_unique<concrete::DefaultFractionSimplification>(); }
+                IFractionSimplification& createFractionSimplification() { 
+                    static concrete::DefaultFractionSimplification fraction_simplification;
+                    return fraction_simplification;
+                }
 
             };
 

@@ -14,8 +14,10 @@ namespace sdkmath {
 
             public:
 
-                std::unique_ptr<INumberArithmetic> createNumberArithmetic() 
-                    { return std::make_unique<concrete::FractionNumberArithmetic>(); }
+                INumberArithmetic& createNumberArithmetic() {
+                    static concrete::FractionNumberArithmetic number_arithmetic;
+                    return number_arithmetic;
+                }
 
             };
 

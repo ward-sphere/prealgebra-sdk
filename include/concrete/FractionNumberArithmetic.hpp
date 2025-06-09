@@ -5,6 +5,9 @@
 #include <Number.hpp>
 
 #include <concrete/PrimeFactorIntegerProperties.hpp>
+
+#include <factory/IntegerPropertiesFactory.hpp>
+
 #include <utility/IIntegerProperties.hpp>
 
 namespace sdkmath {
@@ -15,13 +18,10 @@ namespace sdkmath {
 
             class FractionNumberArithmetic : public INumberArithmetic {
 
-                std::unique_ptr<utility::IIntegerProperties> properties;
+                utility::IIntegerProperties& properties
+                    = factory::IntegerPropertiesFactory().createIntegerProperties();
 
             public:
-
-                FractionNumberArithmetic() {
-                    this->properties = std::make_unique<PrimeFactorIntegerProperties>();
-                }
 
                 std::pair<std::pair<long, long>, std::pair<long, long>> common(const Number& lhs, const Number& rhs) {
                     std::pair<long, long> left_fraction = lhs.toFractionalValues();
@@ -31,7 +31,7 @@ namespace sdkmath {
                 }
 
                 void change_base(std::pair<long, long>& u, std::pair<long, long>& v) {
-                    long lcd = properties->lcm(u.second, v.second);
+                    long lcd = properties.lcm(u.second, v.second);
                     {
                         // change u to have denominator lcd
                         long multiplier = lcd / u.second;
@@ -47,7 +47,7 @@ namespace sdkmath {
                 }
 
                 void simplify(std::pair<long, long>& f) {
-                    long gcd = properties->gcd(f.first, f.second);
+                    long gcd = properties.gcd(f.first, f.second);
                     f.first /= gcd;
                     f.second /= gcd;
                 }

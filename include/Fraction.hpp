@@ -35,7 +35,7 @@ namespace sdkmath {
             /// @brief fraction denominator; non-zero
             long denominator = 1;
 
-            static std::unique_ptr<IFractionSimplification> simplification;
+            static IFractionSimplification& simplification;
 
         public:
 
@@ -64,7 +64,7 @@ namespace sdkmath {
             long getDenominator(void) const { return denominator; }
 
             /// @brief call IFractionSimplification instance to get simplified version of this
-            Fraction simplified(void) const { return simplification->simplify(*this); }
+            Fraction simplified(void) const { return simplification.simplify(*this); }
 
             /// @brief change this fraction into its simplified version 
             void simplify(void) {
